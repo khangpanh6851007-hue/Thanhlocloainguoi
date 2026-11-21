@@ -11,6 +11,7 @@
             --neon-red: #ff2a5f;
             --neon-cyan: #00f3ff;
             --neon-purple: #b537f2;
+            --neon-gold: #ffb800;
             --text-main: #e2e8f0;
             --text-muted: #94a3b8;
         }
@@ -24,7 +25,7 @@
 
         body {
             background-color: var(--bg-dark);
-            background-image: 
+            background-image:
                 radial-gradient(circle at 15% 50%, rgba(255, 42, 95, 0.12), transparent 35%),
                 radial-gradient(circle at 85% 30%, rgba(0, 243, 255, 0.12), transparent 35%);
             color: var(--text-main);
@@ -33,7 +34,6 @@
             padding-bottom: 50px;
         }
 
-        /* Lưới nền công nghệ 5.0 */
         body::before {
             content: "";
             position: fixed;
@@ -45,13 +45,80 @@
             pointer-events: none;
         }
 
-        /* Header HUD */
         header {
             text-align: center;
-            padding: 40px 20px 25px;
+            padding: 36px 20px 24px;
             border-bottom: 1px solid rgba(255, 42, 95, 0.3);
             background: linear-gradient(180deg, rgba(255, 42, 95, 0.08) 0%, transparent 100%);
             position: relative;
+        }
+
+        .top-role-bar {
+            max-width: 1140px;
+            margin: 0 auto 16px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            background: rgba(10, 15, 28, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            padding: 10px 16px;
+        }
+
+        .role-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .role-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .role-guest .role-dot {
+            background: var(--text-muted);
+            box-shadow: 0 0 8px var(--text-muted);
+        }
+
+        .role-admin .role-dot {
+            background: #00ff9d;
+            box-shadow: 0 0 10px #00ff9d;
+        }
+
+        .role-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .btn-role {
+            padding: 7px 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 243, 255, 0.4);
+            background: rgba(0, 243, 255, 0.12);
+            color: var(--neon-cyan);
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .btn-role:hover {
+            background: rgba(0, 243, 255, 0.24);
+        }
+
+        .btn-role.admin-active {
+            border-color: rgba(255, 42, 95, 0.5);
+            background: rgba(255, 42, 95, 0.15);
+            color: #ff85a2;
         }
 
         .badge-version {
@@ -69,14 +136,13 @@
         }
 
         h1 {
-            font-size: 1.8rem;
+            font-size: 1.75rem;
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             background: linear-gradient(90deg, #fff, var(--neon-red), #ff8a00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 25px rgba(255, 42, 95, 0.4);
             margin-bottom: 10px;
             line-height: 1.3;
         }
@@ -84,160 +150,367 @@
         .subtitle {
             color: var(--text-muted);
             font-size: 0.9rem;
-            max-width: 600px;
+            max-width: 680px;
             margin: 0 auto;
+        }
+
+        .wrapper {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
         /* Bảng điều khiển & Thống kê */
         .control-panel {
-            max-width: 1100px;
-            margin: 25px auto;
-            padding: 0 20px;
+            margin: 22px auto 16px;
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 12px;
             justify-content: space-between;
             align-items: center;
         }
 
         .search-box {
             flex: 1;
-            min-width: 260px;
-            position: relative;
+            min-width: 250px;
         }
 
         .search-box input {
             width: 100%;
-            padding: 12px 18px;
-            background: rgba(15, 23, 42, 0.8);
+            padding: 12px 16px;
+            background: rgba(15, 23, 42, 0.85);
             border: 1px solid rgba(0, 243, 255, 0.3);
             border-radius: 10px;
             color: #fff;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             outline: none;
-            transition: 0.3s;
-            backdrop-filter: blur(10px);
+            transition: 0.25s;
         }
 
         .search-box input:focus {
             border-color: var(--neon-cyan);
-            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.25);
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 9px 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(15, 23, 42, 0.75);
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            border-color: var(--neon-cyan);
+            color: #fff;
+            background: rgba(0, 243, 255, 0.14);
         }
 
         .stats-bar {
             display: flex;
-            gap: 15px;
+            flex-wrap: wrap;
+            gap: 14px;
             background: var(--card-bg);
-            padding: 10px 20px;
+            padding: 10px 18px;
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(12px);
-            font-size: 0.85rem;
+            font-size: 0.84rem;
         }
 
         .stat-item span {
-            font-weight: bold;
-            font-size: 1rem;
+            font-weight: 800;
+            font-size: 0.98rem;
         }
 
         .text-danger { color: var(--neon-red); }
         .text-safe { color: var(--neon-cyan); }
+        .text-gold { color: var(--neon-gold); }
 
-        /* Form thêm mục tiêu mới */
-        .add-section {
-            max-width: 1100px;
-            margin: 0 auto 30px;
-            padding: 0 20px;
+        /* Khu vực Quản lý (chỉ mở khi có quyền Admin) */
+        .admin-panel {
+            display: none;
+            margin-bottom: 24px;
+            background: rgba(12, 18, 34, 0.88);
+            border: 1px solid rgba(0, 243, 255, 0.35);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
         }
 
-        .add-form {
+        .admin-panel.unlocked {
+            display: block;
+        }
+
+        .admin-header-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            background: rgba(255, 42, 95, 0.05);
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px dashed rgba(255, 42, 95, 0.4);
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .add-form input, .add-form select {
-            padding: 10px 14px;
-            background: rgba(10, 14, 26, 0.9);
+        .admin-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--neon-cyan);
+            letter-spacing: 0.6px;
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 8px 14px;
+            border-radius: 8px;
             border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-muted);
+            font-weight: 700;
+            font-size: 0.82rem;
+            cursor: pointer;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, rgba(0, 243, 255, 0.2), rgba(181, 55, 242, 0.2));
+            border-color: var(--neon-cyan);
+            color: #fff;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .key-creator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .field-group label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .input-dark, .select-dark, .textarea-dark {
+            width: 100%;
+            padding: 10px 12px;
+            background: rgba(8, 12, 22, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.16);
             border-radius: 8px;
             color: #fff;
-            flex: 1;
-            min-width: 180px;
+            font-size: 0.9rem;
+            outline: none;
         }
 
-        .btn-add {
-            padding: 10px 22px;
+        .input-dark:focus, .select-dark:focus, .textarea-dark:focus {
+            border-color: var(--neon-cyan);
+        }
+
+        .key-input-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-mini {
+            padding: 0 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 184, 0, 0.45);
+            background: rgba(255, 184, 0, 0.14);
+            color: var(--neon-gold);
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .btn-create-key {
+            padding: 12px 22px;
             background: linear-gradient(135deg, var(--neon-cyan), #0077ff);
             border: none;
-            border-radius: 8px;
-            color: #000;
-            font-weight: 800;
+            border-radius: 10px;
+            color: #020617;
+            font-weight: 900;
+            font-size: 0.88rem;
+            letter-spacing: 0.6px;
             cursor: pointer;
-            transition: 0.3s;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            transition: 0.25s;
         }
 
-        .btn-add:hover {
-            box-shadow: 0 0 18px rgba(0, 243, 255, 0.6);
-            transform: translateY(-2px);
+        .btn-create-key:hover {
+            box-shadow: 0 0 18px rgba(0, 243, 255, 0.55);
+            transform: translateY(-1px);
+        }
+
+        .bulk-box {
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.14);
+        }
+
+        .textarea-dark {
+            min-height: 85px;
+            font-family: monospace;
+            resize: vertical;
+            margin-bottom: 10px;
+        }
+
+        /* Bảng danh sách Key */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        table.key-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            background: rgba(7, 11, 20, 0.85);
+        }
+
+        table.key-table th, table.key-table td {
+            padding: 11px 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            white-space: nowrap;
+        }
+
+        table.key-table th {
+            background: rgba(0, 243, 255, 0.08);
+            color: var(--neon-cyan);
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.6px;
+        }
+
+        .key-code-pill {
+            font-family: monospace;
+            background: rgba(255, 184, 0, 0.12);
+            color: var(--neon-gold);
+            border: 1px solid rgba(255, 184, 0, 0.35);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        .status-pill {
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.72rem;
+            font-weight: 800;
+        }
+
+        .status-active {
+            background: rgba(255, 42, 95, 0.18);
+            color: #ff7597;
+            border: 1px solid rgba(255, 42, 95, 0.45);
+        }
+
+        .status-purged {
+            background: rgba(0, 243, 255, 0.16);
+            color: var(--neon-cyan);
+            border: 1px solid rgba(0, 243, 255, 0.4);
+        }
+
+        .tbl-btn {
+            padding: 5px 9px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-right: 4px;
+        }
+
+        .tbl-btn:hover {
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+        }
+
+        .tbl-btn.danger:hover {
+            border-color: var(--neon-red);
+            color: #ff7597;
         }
 
         /* Lưới danh sách thực thể */
         .grid-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 22px;
+            grid-template-columns: repeat(auto-fill, minmax(305px, 1fr));
+            gap: 20px;
         }
 
-        /* Thẻ thực thể 5.0 */
         .entity-card {
             background: var(--card-bg);
             border: 1px solid rgba(255, 42, 95, 0.35);
             border-radius: 16px;
-            padding: 22px;
+            padding: 20px;
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(16px);
-            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .entity-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
             border-color: var(--neon-red);
-            box-shadow: 0 12px 35px rgba(255, 42, 95, 0.25);
+            box-shadow: 0 12px 35px rgba(255, 42, 95, 0.22);
         }
 
-        /* Trạng thái đã tiêu diệt */
         .entity-card.eliminated {
             border-color: rgba(0, 243, 255, 0.3);
-            opacity: 0.65;
-            filter: grayscale(60%);
+            opacity: 0.68;
+            filter: grayscale(55%);
         }
 
         .entity-card.eliminated::after {
             content: "ĐÃ THANH TẨY HOÀN TOÀN";
             position: absolute;
-            top: 50%; left: 50%;
+            top: 48%; left: 50%;
             transform: translate(-50%, -50%) rotate(-12deg);
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.88);
             color: var(--neon-cyan);
             border: 2px solid var(--neon-cyan);
-            padding: 8px 16px;
+            padding: 7px 14px;
             font-weight: 900;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
             border-radius: 6px;
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.45);
             pointer-events: none;
             white-space: nowrap;
         }
@@ -246,7 +519,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
         .entity-id {
@@ -259,19 +532,18 @@
         }
 
         .danger-level {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 800;
             padding: 4px 10px;
             border-radius: 20px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.8px;
         }
 
         .level-sss {
             background: rgba(255, 42, 95, 0.2);
             color: var(--neon-red);
             border: 1px solid var(--neon-red);
-            box-shadow: 0 0 10px rgba(255, 42, 95, 0.3);
         }
 
         .level-ss {
@@ -280,55 +552,127 @@
             border: 1px solid var(--neon-purple);
         }
 
+        .key-strip {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 184, 0, 0.08);
+            border: 1px solid rgba(255, 184, 0, 0.28);
+            border-radius: 8px;
+            padding: 7px 10px;
+            margin-bottom: 12px;
+            font-size: 0.8rem;
+        }
+
+        .key-strip code {
+            color: var(--neon-gold);
+            font-weight: 700;
+            word-break: break-all;
+        }
+
+        .btn-copy-sm {
+            background: rgba(255, 184, 0, 0.18);
+            color: var(--neon-gold);
+            border: 1px solid rgba(255, 184, 0, 0.4);
+            border-radius: 5px;
+            padding: 3px 8px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
         .entity-name {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 800;
             color: #fff;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .entity-type {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             color: var(--neon-cyan);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             display: block;
             font-weight: 600;
         }
 
         .entity-desc {
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             color: var(--text-muted);
-            line-height: 1.55;
-            margin-bottom: 20px;
-            min-height: 60px;
+            line-height: 1.5;
+            margin-bottom: 18px;
+            min-height: 54px;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 8px;
         }
 
         .btn-purge {
-            width: 100%;
-            padding: 12px;
+            flex: 1;
+            padding: 11px;
             background: linear-gradient(90deg, #ff2a5f, #b80036);
             border: none;
             border-radius: 10px;
             color: #fff;
             font-weight: 800;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
+            font-size: 0.85rem;
+            letter-spacing: 0.8px;
             cursor: pointer;
             text-transform: uppercase;
-            transition: 0.3s;
-            position: relative;
-            overflow: hidden;
+            transition: 0.25s;
         }
 
         .btn-purge:hover {
-            box-shadow: 0 0 20px rgba(255, 42, 95, 0.7);
-            letter-spacing: 2px;
+            box-shadow: 0 0 18px rgba(255, 42, 95, 0.65);
         }
 
         .entity-card.eliminated .btn-purge {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.12);
             color: var(--text-muted);
+        }
+
+        .btn-card-del {
+            padding: 0 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            background: rgba(255, 255, 255, 0.05);
+            color: #cbd5e1;
+            font-weight: 700;
+            font-size: 0.8rem;
             cursor: pointer;
+        }
+
+        .btn-card-del:hover {
+            border-color: var(--neon-red);
+            color: #ff7597;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 22px;
+            right: 22px;
+            background: rgba(10, 18, 34, 0.96);
+            color: var(--neon-cyan);
+            border: 1px solid var(--neon-cyan);
+            padding: 11px 18px;
+            border-radius: 10px;
+            font-size: 0.86rem;
+            font-weight: 700;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+            opacity: 0;
+            transform: translateY(12px);
+            transition: 0.25s;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         footer {
@@ -340,190 +684,541 @@
         }
 
         @media (max-width: 600px) {
-            h1 { font-size: 1.4rem; }
-            .stats-bar { width: 100%; justify-content: space-around; }
+            h1 { font-size: 1.35rem; }
+            .stats-bar { width: 100%; justify-content: space-between; }
         }
     </style>
 </head>
 <body>
 
     <header>
+        <div class="top-role-bar">
+            <div id="roleBadge" class="role-status role-guest">
+                <span class="role-dot"></span>
+                <span id="roleLabel">CHẾ ĐỘ: KHÁCH (CHỈ XEM & TRA CỨU)</span>
+            </div>
+            <div class="role-actions">
+                <button id="toggleRoleBtn" class="btn-role" onclick="handleRoleButton()">🔐 Đăng Nhập Quyền Quản Lý</button>
+                <button id="changePinBtn" class="btn-role" style="display:none;" onclick="changeAdminPin()">🔑 Đổi Mã PIN</button>
+            </div>
+        </div>
+
         <div class="badge-version">GIAO DIỆN HỆ THỐNG 5.0 // CORE-X</div>
         <h1>Những Chúng Sanh & Linh Hồn Mất Dạy Cần Tiêu Diệt Hoàn Toàn Từ Năm 2027-2040</h1>
         <p class="subtitle">Cơ sở dữ liệu lưu trữ, truy quét và thanh tẩy các tàn dư ác linh, tạp niệm và thực thể hỗn loạn trong đa vũ trụ.</p>
     </header>
 
-    <div class="control-panel">
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="🔍 Nhập tên thực thể hoặc tội danh để truy quét..." onkeyup="filterEntities()">
+    <div class="wrapper">
+        <!-- Bảng Quyền Quản Lý (PIN mặc định: 6868) -->
+        <section id="adminPanel" class="admin-panel">
+            <div class="admin-header-row">
+                <div class="admin-title">🛡️ TRUNG TÂM QUYỀN QUẢN LÝ — MỖI KEY LÀ MỘT HỒ SƠ (1 KEY = 1 HỒ SƠ)</div>
+                <div class="admin-tabs">
+                    <button class="tab-btn active" onclick="switchTab('createTab', this)">⚡ Tạo Key & Hồ Sơ</button>
+                    <button class="tab-btn" onclick="switchTab('listTab', this)">📋 Danh Sách Key (<span id="keyTabCount">0</span>)</button>
+                </div>
+            </div>
+
+            <!-- Tab 1: Tạo Key => Khởi tạo ngay 1 hồ sơ tương ứng -->
+            <div id="createTab" class="tab-content active">
+                <div class="key-creator-grid">
+                    <div class="field-group">
+                        <label for="customKeyInput">Mã Key (nhập tay hoặc sinh tự động)</label>
+                        <div class="key-input-row">
+                            <input type="text" id="customKeyInput" class="input-dark" placeholder="VD: KEY-2027-A9F1">
+                            <button type="button" class="btn-mini" onclick="fillRandomKey()">🎲 Sinh Mã</button>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <label for="newEntityName">Tên thực thể / Linh hồn (tùy chọn)</label>
+                        <input type="text" id="newEntityName" class="input-dark" placeholder="Để trống sẽ tự gán theo Key">
+                    </div>
+                    <div class="field-group">
+                        <label for="newEntityLevel">Cấp độ nguy hiểm</label>
+                        <select id="newEntityLevel" class="select-dark">
+                            <option value="SSS">Cấp độ SSS (Cực Nguy Hiểm)</option>
+                            <option value="SS">Cấp độ SS (Nguy Hiểm Cao)</option>
+                        </select>
+                    </div>
+                    <div class="field-group">
+                        <label for="newEntityDesc">Mô tả hành vi / Tội trạng</label>
+                        <input type="text" id="newEntityDesc" class="input-dark" placeholder="Hồ sơ liên kết trực tiếp với Key...">
+                    </div>
+                </div>
+
+                <button type="button" class="btn-create-key" onclick="createKeyAsProfile()">⚡ Tạo Key & Khởi Tạo Hồ Sơ Mới</button>
+
+                <div class="bulk-box">
+                    <div class="field-group">
+                        <label for="bulkKeysInput">Tạo hàng loạt Key (mỗi dòng 1 Key = tự động tạo 1 hồ sơ riêng biệt)</label>
+                        <textarea id="bulkKeysInput" class="textarea-dark" placeholder="Ví dụ:&#10;KEY-ALPHA-001&#10;KEY-ALPHA-002&#10;KEY-ALPHA-003"></textarea>
+                    </div>
+                    <button type="button" class="btn-role" onclick="createBulkKeysAsProfiles()">📥 Tạo Hàng Loạt Key & Hồ Sơ</button>
+                </div>
+            </div>
+
+            <!-- Tab 2: Danh sách toàn bộ Key và hồ sơ liên kết -->
+            <div id="listTab" class="tab-content">
+                <div class="table-responsive">
+                    <table class="key-table">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Mã Key</th>
+                                <th>Mã Hồ Sơ</th>
+                                <th>Tên Thực Thể</th>
+                                <th>Cấp Độ</th>
+                                <th>Trạng Thái</th>
+                                <th>Ngày Tạo</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="keyListBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tìm kiếm, lọc & thống kê -->
+        <div class="control-panel">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 Tìm theo tên thực thể, mã Key, ID hoặc tội danh..." oninput="renderEntities()">
+            </div>
+            <div class="filter-group">
+                <button class="filter-btn active" data-filter="all" onclick="setFilter('all', this)">Tất cả</button>
+                <button class="filter-btn" data-filter="active" onclick="setFilter('active', this)">Chưa thanh tẩy</button>
+                <button class="filter-btn" data-filter="purged" onclick="setFilter('purged', this)">Đã thanh tẩy</button>
+            </div>
+            <div class="stats-bar">
+                <div class="stat-item">Tổng Key/Hồ sơ: <span id="totalCount" class="text-gold">0</span></div>
+                <div class="stat-item">|</div>
+                <div class="stat-item">Tồn tại: <span id="activeCount" class="text-danger">0</span></div>
+                <div class="stat-item">|</div>
+                <div class="stat-item">Đã thanh tẩy: <span id="purgedCount" class="text-safe">0</span></div>
+            </div>
         </div>
-        <div class="stats-bar">
-            <div class="stat-item">Mục tiêu tồn tại: <span id="activeCount" class="text-danger">0</span></div>
-            <div class="stat-item">|</div>
-            <div class="stat-item">Đã tiêu diệt: <span id="purgedCount" class="text-safe">0</span></div>
-        </div>
+
+        <!-- Lưới danh sách thực thể -->
+        <div class="grid-container" id="entityGrid"></div>
     </div>
 
-    <div class="add-section">
-        <div class="add-form">
-            <input type="text" id="newName" placeholder="Tên thực thể / Linh hồn mới...">
-            <input type="text" id="newDesc" placeholder="Mô tả hành vi / Tội trạng...">
-            <select id="newLevel">
-                <option value="SSS">Cấp độ SSS (Cực Nguy Hiểm)</option>
-                <option value="SS">Cấp độ SS (Nguy Hiểm Cao)</option>
-            </select>
-            <button class="btn-add" onclick="addEntity()">+ Thêm Hồ Sơ</button>
-        </div>
-    </div>
-
-    <div class="grid-container" id="entityGrid">
-        <!-- Dữ liệu sẽ được render tự động bằng JavaScript -->
-    </div>
+    <div id="toast" class="toast"></div>
 
     <footer>
         HỆ THỐNG QUẢN LÝ THỰC THỂ 5.0 ★ Do KhangPanh68 Thiết Kế Trên nền tảng Android/IOS
     </footer>
 
     <script>
-        // Dữ liệu mẫu mang phong cách huyền huyễn / giả tưởng
-        let entities = [
+        const STORAGE_KEY = 'entities_v5_key_profiles';
+        const PIN_STORAGE_KEY = 'system5_admin_pin';
+        let isAdmin = false;
+        let currentFilter = 'all';
+
+        function getAdminPin() {
+            return localStorage.getItem(PIN_STORAGE_KEY) || '6868';
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            clearTimeout(window.__toastTimer);
+            window.__toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
+        }
+
+        function generateRandomKeyCode() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            let part1 = '', part2 = '';
+            for (let i = 0; i < 4; i++) {
+                part1 += chars[Math.floor(Math.random() * chars.length)];
+                part2 += chars[Math.floor(Math.random() * chars.length)];
+            }
+            return `KP68-${part1}-${part2}`;
+        }
+
+        function fillRandomKey() {
+            document.getElementById('customKeyInput').value = generateRandomKeyCode();
+        }
+
+        const defaultEntities = [
             {
                 id: "ENT-001",
+                keyCode: "KEY-2027-001A",
                 name: "Ác Linh Tham Lam Hư Không",
                 type: "Hệ: Tà Niệm Cổ Đại",
                 level: "SSS",
                 desc: "Chuyên hút cạn sinh khí và gieo rắc sự đố kỵ, phản bội vào tâm trí các sinh linh yếu bóng vía.",
-                eliminated: false
+                eliminated: false,
+                createdAt: "2027-01-01"
             },
             {
                 id: "ENT-002",
+                keyCode: "KEY-2027-002B",
                 name: "Quỷ Thao Túng Tâm Trí",
                 type: "Hệ: Ảo Giác & Lừa Dối",
                 level: "SSS",
                 desc: "Thường xuyên ngụy trang thành kẻ đáng thương để đâm sau lưng và phá hoại trật tự không gian.",
-                eliminated: false
+                eliminated: false,
+                createdAt: "2027-01-01"
             },
             {
                 id: "ENT-003",
+                keyCode: "KEY-2027-003C",
                 name: "Tàn Hồn Ngạo Mạn Vô Tri",
                 type: "Hệ: Oán Khí Hỗn Mang",
                 level: "SS",
                 desc: "Phát tán sóng nhiễu loạn, coi thường luật nhân quả, gây mất cân bằng năng lượng khu vực.",
-                eliminated: false
-            },
-            {
-                id: "ENT-004",
-                name: "Ký Sinh Trùng Lời Nguyền",
-                type: "Hệ: Độc Tố Tinh Thần",
-                level: "SSS",
-                desc: "Bám víu vào hào quang của người khác để trục lợi, gieo rắc thị phi và năng lượng tiêu cực.",
-                eliminated: false
-            },
-            {
-                id: "ENT-005",
-                name: "Bóng Ma Vô Ơn Bội Nghĩa",
-                type: "Hệ: Hắc Ám Thuần Túy",
-                level: "SS",
-                desc: "Sau khi nhận được sự cứu rỗi liền quay ngược lại cắn xé chính ân nhân của mình.",
-                eliminated: false
-            },
-            {
-                id: "ENT-006",
-                name: "Chúa Tể Hư Vô Hỗn Loạn",
-                type: "Hệ: Thảm Họa Cấp Vũ Trụ",
-                level: "SSS",
-                desc: "Thực thể tập hợp mọi sự xấu xa, cần kích hoạt kết giới thanh tẩy cấp độ cao nhất để xóa sổ.",
-                eliminated: false
+                eliminated: false,
+                createdAt: "2027-01-01"
             }
         ];
 
-        // Lưu trữ vào LocalStorage để không bị mất dữ liệu khi tải lại trang
-        if (localStorage.getItem('entities_v5')) {
-            entities = JSON.parse(localStorage.getItem('entities_v5'));
+        let entities = [];
+        try {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            entities = saved ? JSON.parse(saved) : defaultEntities.slice();
+        } catch (e) {
+            entities = defaultEntities.slice();
         }
 
-        function saveToStorage() {
-            localStorage.setItem('entities_v5', JSON.stringify(entities));
+        function saveEntities() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(entities));
         }
 
-        function renderEntities(filterText = "") {
-            const grid = document.getElementById('entityGrid');
-            grid.innerHTML = "";
-
-            let active = 0;
-            let purged = 0;
-
-            entities.forEach((item, index) => {
-                if (item.eliminated) purged++;
-                else active++;
-
-                if (
-                    item.name.toLowerCase().includes(filterText.toLowerCase()) ||
-                    item.desc.toLowerCase().includes(filterText.toLowerCase())
-                ) {
-                    const card = document.createElement('div');
-                    card.className = `entity-card ${item.eliminated ? 'eliminated' : ''}`;
-                    
-                    const levelClass = item.level === 'SSS' ? 'level-sss' : 'level-ss';
-                    const btnText = item.eliminated ? '↺ Khôi Phục Hồ Sơ' : '⚡ Kích Hoạt Tiêu Diệt';
-
-                    card.innerHTML = `
-                        <div class="card-header">
-                            <span class="entity-id">${item.id}</span>
-                            <span class="danger-level ${levelClass}">NGUY HIỂM ${item.level}</span>
-                        </div>
-                        <h3 class="entity-name">${item.name}</h3>
-                        <span class="entity-type">${item.type}</span>
-                        <p class="entity-desc">${item.desc}</p>
-                        <button class="btn-purge" onclick="togglePurge(${index})">${btnText}</button>
-                    `;
-                    grid.appendChild(card);
+        function nextEntityId() {
+            let maxNum = 0;
+            entities.forEach(item => {
+                const match = String(item.id || '').match(/ENT-(\d+)/i);
+                if (match) {
+                    const n = parseInt(match[1], 10);
+                    if (n > maxNum) maxNum = n;
                 }
             });
-
-            document.getElementById('activeCount').innerText = active;
-            document.getElementById('purgedCount').innerText = purged;
+            return `ENT-${String(maxNum + 1).padStart(3, '0')}`;
         }
 
-        function togglePurge(index) {
-            entities[index].eliminated = !entities[index].eliminated;
-            saveToStorage();
-            renderEntities(document.getElementById('searchInput').value);
+        function isDuplicateKey(code) {
+            const norm = code.trim().toUpperCase();
+            return entities.some(e => String(e.keyCode || '').trim().toUpperCase() === norm);
         }
 
-        function filterEntities() {
-            const query = document.getElementById('searchInput').value;
-            renderEntities(query);
+        function updateRoleUI() {
+            const badge = document.getElementById('roleBadge');
+            const label = document.getElementById('roleLabel');
+            const btn = document.getElementById('toggleRoleBtn');
+            const pinBtn = document.getElementById('changePinBtn');
+            const panel = document.getElementById('adminPanel');
+
+            if (isAdmin) {
+                badge.className = 'role-status role-admin';
+                label.textContent = 'CHẾ ĐỘ: QUẢN LÝ (ĐÃ XÁC THỰC)';
+                btn.textContent = '🔓 Thoát Quyền Quản Lý';
+                btn.className = 'btn-role admin-active';
+                pinBtn.style.display = 'inline-block';
+                panel.classList.add('unlocked');
+            } else {
+                badge.className = 'role-status role-guest';
+                label.textContent = 'CHẾ ĐỘ: KHÁCH (CHỈ XEM & TRA CỨU)';
+                btn.textContent = '🔐 Đăng Nhập Quyền Quản Lý';
+                btn.className = 'btn-role';
+                pinBtn.style.display = 'none';
+                panel.classList.remove('unlocked');
+            }
+            renderEntities();
+            renderKeyTable();
         }
 
-        function addEntity() {
-            const nameInput = document.getElementById('newName');
-            const descInput = document.getElementById('newDesc');
-            const levelInput = document.getElementById('newLevel');
+        function handleRoleButton() {
+            if (isAdmin) {
+                isAdmin = false;
+                updateRoleUI();
+                showToast('Đã chuyển về chế độ Khách.');
+                return;
+            }
+            const inputPin = prompt('Nhập mã PIN Quản Lý (mặc định: 6868):');
+            if (inputPin === null) return;
+            if (inputPin.trim() === getAdminPin()) {
+                isAdmin = true;
+                updateRoleUI();
+                showToast('Đã mở khóa Quyền Quản Lý!');
+            } else {
+                alert('Mã PIN không chính xác!');
+            }
+        }
 
-            if (!nameInput.value.trim() || !descInput.value.trim()) {
-                alert("Vui lòng nhập đầy đủ tên thực thể và mô tả tội trạng!");
+        function changeAdminPin() {
+            if (!isAdmin) return;
+            const current = prompt('Nhập mã PIN hiện tại:');
+            if (current === null) return;
+            if (current.trim() !== getAdminPin()) {
+                alert('Mã PIN hiện tại không đúng!');
+                return;
+            }
+            const nextPin = prompt('Nhập mã PIN mới (tối thiểu 4 ký tự):');
+            if (nextPin === null) return;
+            const clean = nextPin.trim();
+            if (clean.length < 4) {
+                alert('Mã PIN mới phải có ít nhất 4 ký tự!');
+                return;
+            }
+            localStorage.setItem(PIN_STORAGE_KEY, clean);
+            showToast('Đã cập nhật mã PIN Quản Lý mới.');
+        }
+
+        function switchTab(tabId, btnEl) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            if (btnEl) btnEl.classList.add('active');
+            if (tabId === 'listTab') renderKeyTable();
+        }
+
+        function createKeyAsProfile() {
+            if (!isAdmin) {
+                alert('Bạn cần đăng nhập Quyền Quản Lý để tạo Key & Hồ sơ.');
+                return;
+            }
+            const keyInput = document.getElementById('customKeyInput');
+            const nameInput = document.getElementById('newEntityName');
+            const levelInput = document.getElementById('newEntityLevel');
+            const descInput = document.getElementById('newEntityDesc');
+
+            let keyCode = keyInput.value.trim().toUpperCase();
+            if (!keyCode) {
+                keyCode = generateRandomKeyCode();
+            }
+
+            if (isDuplicateKey(keyCode)) {
+                alert(`Mã Key "${keyCode}" đã tồn tại và đã gắn với một hồ sơ khác!`);
                 return;
             }
 
-            const newId = "ENT-00" + (entities.length + 1);
+            const newId = nextEntityId();
+            const entityName = nameInput.value.trim() || `Thực Thể Liên Kết [${keyCode}]`;
+            const entityDesc = descInput.value.trim() || `Hồ sơ được khởi tạo tự động từ Key ${keyCode} trong hệ thống thanh tẩy 5.0.`;
+
             entities.unshift({
                 id: newId,
-                name: nameInput.value.trim(),
-                type: "Hệ: Thực Thể Mới Phát Hiện",
+                keyCode: keyCode,
+                name: entityName,
+                type: "Hệ: Hồ Sơ Khởi Tạo Từ Key",
                 level: levelInput.value,
-                desc: descInput.value.trim(),
-                eliminated: false
+                desc: entityDesc,
+                eliminated: false,
+                createdAt: new Date().toISOString().slice(0, 10)
             });
 
-            nameInput.value = "";
-            descInput.value = "";
-            saveToStorage();
+            keyInput.value = '';
+            nameInput.value = '';
+            descInput.value = '';
+
+            saveEntities();
+            renderEntities();
+            renderKeyTable();
+            showToast(`Đã tạo Key ${keyCode} và khởi tạo hồ sơ ${newId}!`);
+        }
+
+        function createBulkKeysAsProfiles() {
+            if (!isAdmin) {
+                alert('Bạn cần đăng nhập Quyền Quản Lý để tạo Key hàng loạt.');
+                return;
+            }
+            const textarea = document.getElementById('bulkKeysInput');
+            const lines = textarea.value
+                .split(/\r?\n/)
+                .map(line => line.trim().toUpperCase())
+                .filter(Boolean);
+
+            if (!lines.length) {
+                alert('Vui lòng nhập ít nhất 1 mã Key (mỗi dòng 1 Key).');
+                return;
+            }
+
+            const level = document.getElementById('newEntityLevel').value;
+            let added = 0;
+            let skipped = 0;
+
+            for (const rawKey of lines) {
+                if (isDuplicateKey(rawKey)) {
+                    skipped++;
+                    continue;
+                }
+                const newId = nextEntityId();
+                entities.unshift({
+                    id: newId,
+                    keyCode: rawKey,
+                    name: `Thực Thể [${rawKey}]`,
+                    type: "Hệ: Hồ Sơ Hàng Loạt Từ Key",
+                    level: level,
+                    desc: `Hồ sơ độc bản được sinh tự động khi tạo Key ${rawKey}.`,
+                    eliminated: false,
+                    createdAt: new Date().toISOString().slice(0, 10)
+                });
+                added++;
+            }
+
+            if (added > 0) {
+                textarea.value = '';
+                saveEntities();
+                renderEntities();
+                renderKeyTable();
+            }
+            showToast(`Tạo thành công ${added} Key & hồ sơ${skipped ? `, bỏ qua ${skipped} Key trùng` : ''}.`);
+        }
+
+        function copyText(text) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => showToast(`Đã sao chép: ${text}`)).catch(() => fallbackCopy(text));
+            } else {
+                fallbackCopy(text);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const temp = document.createElement('textarea');
+            temp.value = text;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            showToast(`Đã sao chép: ${text}`);
+        }
+
+        function togglePurgeByKey(keyCode) {
+            const idx = entities.findIndex(e => e.keyCode === keyCode);
+            if (idx === -1) return;
+            entities[idx].eliminated = !entities[idx].eliminated;
+            saveEntities();
+            renderEntities();
+            renderKeyTable();
+            showToast(entities[idx].eliminated ? `Đã thanh tẩy hồ sơ ${entities[idx].id}` : `Đã khôi phục hồ sơ ${entities[idx].id}`);
+        }
+
+        function deleteProfileByKey(keyCode) {
+            if (!isAdmin) {
+                alert('Chỉ Quản Lý mới có quyền xóa hồ sơ và thu hồi Key.');
+                return;
+            }
+            const target = entities.find(e => e.keyCode === keyCode);
+            if (!target) return;
+            if (!confirm(`Xóa vĩnh viễn hồ sơ ${target.id} và thu hồi Key "${target.keyCode}"?`)) return;
+            entities = entities.filter(e => e.keyCode !== keyCode);
+            saveEntities();
+            renderEntities();
+            renderKeyTable();
+            showToast(`Đã thu hồi Key ${target.keyCode} và xóa hồ sơ.`);
+        }
+
+        function setFilter(mode, btnEl) {
+            currentFilter = mode;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            if (btnEl) btnEl.classList.add('active');
             renderEntities();
         }
 
-        // Khởi chạy lần đầu
-        renderEntities();
+        function renderEntities() {
+            const grid = document.getElementById('entityGrid');
+            const query = (document.getElementById('searchInput').value || '').trim().toLowerCase();
+            grid.innerHTML = '';
+
+            let activeTotal = 0;
+            let purgedTotal = 0;
+
+            entities.forEach(item => {
+                if (item.eliminated) purgedTotal++;
+                else activeTotal++;
+            });
+
+            document.getElementById('totalCount').textContent = entities.length;
+            document.getElementById('activeCount').textContent = activeTotal;
+            document.getElementById('purgedCount').textContent = purgedTotal;
+            document.getElementById('keyTabCount').textContent = entities.length;
+
+            const filtered = entities.filter(item => {
+                if (currentFilter === 'active' && item.eliminated) return false;
+                if (currentFilter === 'purged' && !item.eliminated) return false;
+                if (!query) return true;
+                return (
+                    String(item.name || '').toLowerCase().includes(query) ||
+                    String(item.desc || '').toLowerCase().includes(query) ||
+                    String(item.keyCode || '').toLowerCase().includes(query) ||
+                    String(item.id || '').toLowerCase().includes(query)
+                );
+            });
+
+            if (!filtered.length) {
+                grid.innerHTML = '<p style="color:#94a3b8;grid-column:1/-1;text-align:center;padding:30px;">Không tìm thấy thực thể hoặc Key phù hợp.</p>';
+                return;
+            }
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = `entity-card ${item.eliminated ? 'eliminated' : ''}`;
+                const levelClass = item.level === 'SSS' ? 'level-sss' : 'level-ss';
+                const btnPurgeText = item.eliminated ? '↺ Khôi Phục Hồ Sơ' : '⚡ Kích Hoạt Tiêu Diệt';
+                const delBtnHtml = isAdmin
+                    ? `<button class="btn-card-del" onclick="deleteProfileByKey('${item.keyCode.replace(/'/g, "\\'")}')">🗑</button>`
+                    : '';
+
+                card.innerHTML = `
+                    <div class="card-header">
+                        <span class="entity-id">${item.id}</span>
+                        <span class="danger-level ${levelClass}">NGUY HIỂM ${item.level}</span>
+                    </div>
+                    <div class="key-strip">
+                        <span>🔑 <code>${item.keyCode}</code></span>
+                        <button class="btn-copy-sm" onclick="copyText('${item.keyCode.replace(/'/g, "\\'")}')">Copy</button>
+                    </div>
+                    <h3 class="entity-name">${item.name}</h3>
+                    <span class="entity-type">${item.type}</span>
+                    <p class="entity-desc">${item.desc}</p>
+                    <div class="card-actions">
+                        <button class="btn-purge" onclick="togglePurgeByKey('${item.keyCode.replace(/'/g, "\\'")}')">${btnPurgeText}</button>
+                        ${delBtnHtml}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function renderKeyTable() {
+            const tbody = document.getElementById('keyListBody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            if (!entities.length) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:#94a3b8;padding:20px;">Chưa có Key nào được tạo.</td></tr>';
+                return;
+            }
+
+            entities.forEach((item, index) => {
+                const tr = document.createElement('tr');
+                const statusBadge = item.eliminated
+                    ? '<span class="status-pill status-purged">Đã thanh tẩy</span>'
+                    : '<span class="status-pill status-active">Đang tồn tại</span>';
+                const safeKey = String(item.keyCode || '').replace(/'/g, "\\'");
+
+                tr.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td><span class="key-code-pill">${item.keyCode}</span></td>
+                    <td><code>${item.id}</code></td>
+                    <td><strong>${item.name}</strong></td>
+                    <td>${item.level}</td>
+                    <td>${statusBadge}</td>
+                    <td>${item.createdAt || '-'}</td>
+                    <td>
+                        <button class="tbl-btn" onclick="copyText('${safeKey}')">Copy</button>
+                        <button class="tbl-btn" onclick="togglePurgeByKey('${safeKey}')">${item.eliminated ? 'Khôi phục' : 'Thanh tẩy'}</button>
+                        <button class="tbl-btn danger" onclick="deleteProfileByKey('${safeKey}')">Thu hồi</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        saveEntities();
+        updateRoleUI();
     </script>
 </body>
 </html>
+                        
