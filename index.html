@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HỆ THỐNG THANH TẨY 5.0 | HỒ SƠ THỰC THỂ</title>
+    <style>
+        :root {
+            --bg-dark: #06080f;
+            --card-bg: rgba(16, 22, 38, 0.65);
+            --neon-red: #ff2a5f;
+            --neon-cyan: #00f3ff;
+            --neon-purple: #b537f2;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(255, 42, 95, 0.12), transparent 35%),
+                radial-gradient(circle at 85% 30%, rgba(0, 243, 255, 0.12), transparent 35%);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-bottom: 50px;
+        }
+
+        /* Lưới nền công nghệ 5.0 */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Header HUD */
+        header {
+            text-align: center;
+            padding: 40px 20px 25px;
+            border-bottom: 1px solid rgba(255, 42, 95, 0.3);
+            background: linear-gradient(180deg, rgba(255, 42, 95, 0.08) 0%, transparent 100%);
+            position: relative;
+        }
+
+        .badge-version {
+            display: inline-block;
+            padding: 4px 14px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--neon-cyan);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 20px;
+            box-shadow: 0 0 12px rgba(0, 243, 255, 0.4);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            background: linear-gradient(90deg, #fff, var(--neon-red), #ff8a00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 25px rgba(255, 42, 95, 0.4);
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Bảng điều khiển & Thống kê */
+        .control-panel {
+            max-width: 1100px;
+            margin: 25px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 260px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 18px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .search-box input:focus {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 15px;
+            background: var(--card-bg);
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            font-size: 0.85rem;
+        }
+
+        .stat-item span {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .text-danger { color: var(--neon-red); }
+        .text-safe { color: var(--neon-cyan); }
+
+        /* Form thêm mục tiêu mới */
+        .add-section {
+            max-width: 1100px;
+            margin: 0 auto 30px;
+            padding: 0 20px;
+        }
+
+        .add-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            background: rgba(255, 42, 95, 0.05);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px dashed rgba(255, 42, 95, 0.4);
+        }
+
+        .add-form input, .add-form select {
+            padding: 10px 14px;
+            background: rgba(10, 14, 26, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            color: #fff;
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .btn-add {
+            padding: 10px 22px;
+            background: linear-gradient(135deg, var(--neon-cyan), #0077ff);
+            border: none;
+            border-radius: 8px;
+            color: #000;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-add:hover {
+            box-shadow: 0 0 18px rgba(0, 243, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* Lưới danh sách thực thể */
+        .grid-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 22px;
+        }
+
+        /* Thẻ thực thể 5.0 */
+        .entity-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 42, 95, 0.35);
+            border-radius: 16px;
+            padding: 22px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(16px);
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .entity-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-red);
+            box-shadow: 0 12px 35px rgba(255, 42, 95, 0.25);
+        }
+
+        /* Trạng thái đã tiêu diệt */
+        .entity-card.eliminated {
+            border-color: rgba(0, 243, 255, 0.3);
+            opacity: 0.65;
+            filter: grayscale(60%);
+        }
+
+        .entity-card.eliminated::after {
+            content: "ĐÃ THANH TẨY HOÀN TOÀN";
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) rotate(-12deg);
+            background: rgba(0, 0, 0, 0.85);
+            color: var(--neon-cyan);
+            border: 2px solid var(--neon-cyan);
+            padding: 8px 16px;
+            font-weight: 900;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            border-radius: 6px;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .entity-id {
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.06);
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .danger-level {
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .level-sss {
+            background: rgba(255, 42, 95, 0.2);
+            color: var(--neon-red);
+            border: 1px solid var(--neon-red);
+            box-shadow: 0 0 10px rgba(255, 42, 95, 0.3);
+        }
+
+        .level-ss {
+            background: rgba(181, 55, 242, 0.2);
+            color: #d982ff;
+            border: 1px solid var(--neon-purple);
+        }
+
+        .entity-name {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .entity-type {
+            font-size: 0.85rem;
+            color: var(--neon-cyan);
+            margin-bottom: 12px;
+            display: block;
+            font-weight: 600;
+        }
+
+        .entity-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.55;
+            margin-bottom: 20px;
+            min-height: 60px;
+        }
+
+        .btn-purge {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(90deg, #ff2a5f, #b80036);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: 800;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-purge:hover {
+            box-shadow: 0 0 20px rgba(255, 42, 95, 0.7);
+            letter-spacing: 2px;
+        }
+
+        .entity-card.eliminated .btn-purge {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            padding: 0 20px;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.4rem; }
+            .stats-bar { width: 100%; justify-content: space-around; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="badge-version">GIAO DIỆN HỆ THỐNG 5.0 // CORE-X</div>
+        <h1>Những Chúng Sanh & Linh Hồn Mất Dạy Cần Tiêu Diệt Hoàn Toàn</h1>
+        <p class="subtitle">Cơ sở dữ liệu lưu trữ, truy quét và thanh tẩy các tàn dư ác linh, tạp niệm và thực thể hỗn loạn trong đa vũ trụ.</p>
+    </header>
+
+    <div class="control-panel">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 Nhập tên thực thể hoặc tội danh để truy quét..." onkeyup="filterEntities()">
+        </div>
+        <div class="stats-bar">
+            <div class="stat-item">Mục tiêu tồn tại: <span id="activeCount" class="text-danger">0</span></div>
+            <div class="stat-item">|</div>
+            <div class="stat-item">Đã tiêu diệt: <span id="purgedCount" class="text-safe">0</span></div>
+        </div>
+    </div>
+
+    <div class="add-section">
+        <div class="add-form">
+            <input type="text" id="newName" placeholder="Tên thực thể / Linh hồn mới...">
+            <input type="text" id="newDesc" placeholder="Mô tả hành vi / Tội trạng...">
+            <select id="newLevel">
+                <option value="SSS">Cấp độ SSS (Cực Nguy Hiểm)</option>
+                <option value="SS">Cấp độ SS (Nguy Hiểm Cao)</option>
+            </select>
+            <button class="btn-add" onclick="addEntity()">+ Thêm Hồ Sơ</button>
+        </div>
+    </div>
+
+    <div class="grid-container" id="entityGrid">
+        <!-- Dữ liệu sẽ được render tự động bằng JavaScript -->
+    </div>
+
+    <footer>
+        HỆ THỐNG QUẢN LÝ THỰC THỂ 5.0 
+    </footer>
+
+    <script>
+        // Dữ liệu mẫu mang phong cách huyền huyễn / giả tưởng
+        let entities = [
+            {
+                id: "ENT-001",
+                name: "Ác Linh Tham Lam Hư Không",
+                type: "Hệ: Tà Niệm Cổ Đại",
+                level: "SSS",
+                desc: "Chuyên hút cạn sinh khí và gieo rắc sự đố kỵ, phản bội vào tâm trí các sinh linh yếu bóng vía.",
+                eliminated: false
+            },
+            {
+                id: "ENT-002",
+                name: "Quỷ Thao Túng Tâm Trí",
+                type: "Hệ: Ảo Giác & Lừa Dối",
+                level: "SSS",
+                desc: "Thường xuyên ngụy trang thành kẻ đáng thương để đâm sau lưng và phá hoại trật tự không gian.",
+                eliminated: false
+            },
+            {
+                id: "ENT-003",
+                name: "Tàn Hồn Ngạo Mạn Vô Tri",
+                type: "Hệ: Oán Khí Hỗn Mang",
+                level: "SS",
+                desc: "Phát tán sóng nhiễu loạn, coi thường luật nhân quả, gây mất cân bằng năng lượng khu vực.",
+                eliminated: false
+            },
+            {
+                id: "ENT-004",
+                name: "Ký Sinh Trùng Lời Nguyền",
+                type: "Hệ: Độc Tố Tinh Thần",
+                level: "SSS",
+                desc: "Bám víu vào hào quang của người khác để trục lợi, gieo rắc thị phi và năng lượng tiêu cực.",
+                eliminated: false
+            },
+            {
+                id: "ENT-005",
+                name: "Bóng Ma Vô Ơn Bội Nghĩa",
+                type: "Hệ: Hắc Ám Thuần Túy",
+                level: "SS",
+                desc: "Sau khi nhận được sự cứu rỗi liền quay ngược lại cắn xé chính ân nhân của mình.",
+                eliminated: false
+            },
+            {
+                id: "ENT-006",
+                name: "Chúa Tể Hư Vô Hỗn Loạn",
+                type: "Hệ: Thảm Họa Cấp Vũ Trụ",
+                level: "SSS",
+                desc: "Thực thể tập hợp mọi sự xấu xa, cần kích hoạt kết giới thanh tẩy cấp độ cao nhất để xóa sổ.",
+                eliminated: false
+            }
+        ];
+
+        // Lưu trữ vào LocalStorage để không bị mất dữ liệu khi tải lại trang
+        if (localStorage.getItem('entities_v5')) {
+            entities = JSON.parse(localStorage.getItem('entities_v5'));
+        }
+
+        function saveToStorage() {
+            localStorage.setItem('entities_v5', JSON.stringify(entities));
+        }
+
+        function renderEntities(filterText = "") {
+            const grid = document.getElementById('entityGrid');
+            grid.innerHTML = "";
+
+            let active = 0;
+            let purged = 0;
+
+            entities.forEach((item, index) => {
+                if (item.eliminated) purged++;
+                else active++;
+
+                if (
+                    item.name.toLowerCase().includes(filterText.toLowerCase()) ||
+                    item.desc.toLowerCase().includes(filterText.toLowerCase())
+                ) {
+                    const card = document.createElement('div');
+                    card.className = `entity-card ${item.eliminated ? 'eliminated' : ''}`;
+                    
+                    const levelClass = item.level === 'SSS' ? 'level-sss' : 'level-ss';
+                    const btnText = item.eliminated ? '↺ Khôi Phục Hồ Sơ' : '⚡ Kích Hoạt Tiêu Diệt';
+
+                    card.innerHTML = `
+                        <div class="card-header">
+                            <span class="entity-id">${item.id}</span>
+                            <span class="danger-level ${levelClass}">NGUY HIỂM ${item.level}</span>
+                        </div>
+                        <h3 class="entity-name">${item.name}</h3>
+                        <span class="entity-type">${item.type}</span>
+                        <p class="entity-desc">${item.desc}</p>
+                        <button class="btn-purge" onclick="togglePurge(${index})">${btnText}</button>
+                    `;
+                    grid.appendChild(card);
+                }
+            });
+
+            document.getElementById('activeCount').innerText = active;
+            document.getElementById('purgedCount').innerText = purged;
+        }
+
+        function togglePurge(index) {
+            entities[index].eliminated = !entities[index].eliminated;
+            saveToStorage();
+            renderEntities(document.getElementById('searchInput').value);
+        }
+
+        function filterEntities() {
+            const query = document.getElementById('searchInput').value;
+            renderEntities(query);
+        }
+
+        function addEntity() {
+            const nameInput = document.getElementById('newName');
+            const descInput = document.getElementById('newDesc');
+            const levelInput = document.getElementById('newLevel');
+
+            if (!nameInput.value.trim() || !descInput.value.trim()) {
+                alert("Vui lòng nhập đầy đủ tên thực thể và mô tả tội trạng!");
+                return;
+            }
+
+            const newId = "ENT-00" + (entities.length + 1);
+            entities.unshift({
+                id: newId,
+                name: nameInput.value.trim(),
+                type: "Hệ: Thực Thể Mới Phát Hiện",
+                level: levelInput.value,
+                desc: descInput.value.trim(),
+                eliminated: false
+            });
+
+            nameInput.value = "";
+            descInput.value = "";
+            saveToStorage();
+            renderEntities();
+        }
+
+        // Khởi chạy lần đầu
+        renderEntities();
+    </script>
+</body>
+</html>
