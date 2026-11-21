@@ -1,34 +1,51 @@
-<div align="center">
+# HỆ THỐNG THANH TẨY 5.0 | HỒ SƠ THỰC THỂ (`CORE-X`)
 
-# ⚡ HỆ THỐNG THANH TẨY 5.0 // CORE-X
-### Cơ Sở Dữ Liệu Truy Quét & Phong Ấn Thực Thể Hỗn Loạn
-
-![Version](https://img.shields.io/badge/Version-5.0.2026-00f3ff?style=for-the-badge&logo=cyberdefenders&logoColor=black)
-![Tech](https://img.shields.io/badge/HTML5-CSS3-JS_Vanilla-ff2a5f?style=for-the-badge&logo=html5&logoColor=white)
-![Mobile IDE](https://img.shields.io/badge/Mobile_IDE-Acode_%7C_TrebEdit-b537f2?style=for-the-badge&logo=android&logoColor=white)
-![Hosting](https://img.shields.io/badge/Deploy-GitHub_Pages-101626?style=for-the-badge&logo=github&logoColor=white)
-
-> *"Nơi lưu trữ, phân loại cấp độ nguy hiểm và kích hoạt kết giới thanh tẩy các tàn dư ác linh, tạp niệm trong đa vũ trụ."*
-
-[🌐 Xem Demo Trực Tiếp](#-triển-khai-trên-github-pages-2026) • [✨ Tính Năng](#-tính-năng-cốt-lõi-giao-diện-50) • [📱 Hướng Dẫn Chạy](#-hướng-dẫn-cài-đặt--chạy-dự-án)
-
-</div>
+Giao diện web quản lý, truy quét và thanh tẩy hồ sơ thực thể theo phong cách Cyberpunk / Huyền huyễn, tích hợp cơ chế **1 Key = 1 Hồ Sơ**, phân quyền **Quản Lý (Admin)** và lưu trữ cục bộ qua `localStorage` để chạy mượt trên cả Android, iOS lẫn máy tính.
 
 ---
 
-## ✨ Tính Năng Cốt Lõi (Giao Diện 5.0)
+## ✨ Tính Năng Chính
 
-* **🎨 Thiết Kế Dark Glassmorphism & Cyberpunk HUD:** Giao diện nền tối sâu kết hợp lưới không gian 5.0, hiệu ứng kính mờ (`backdrop-filter`) và viền phát sáng Neon.
-* **🔍 Truy Quét Thời Gian Thực (Live Search):** Lọc nhanh hồ sơ thực thể theo tên gọi hoặc mô tả tội trạng ngay khi gõ phím.
-* **⚡ Cơ Chế Kích Hoạt Tiêu Diệt:** Tương tác trực tiếp trên từng thẻ hồ sơ để chuyển đổi trạng thái giữa **Tồn Tại** và **Đã Thanh Tẩy Hoàn Toàn**, tự động cập nhật bảng thống kê HUD.
-* **➕ Thêm Hồ Sơ Mới & Lưu Trữ Cục Bộ (`LocalStorage`):** Cho phép thêm thực thể mới (cấp độ `SS` hoặc `SSS`) và tự động lưu dữ liệu ngay trên trình duyệt thiết bị mà không cần backend.
-* **🚀 Siêu Nhẹ & Đa Nền Tảng:** Đóng gói trọn vẹn trong 1 tệp `index.html` duy nhất, không phụ thuộc thư viện bên thứ ba.
+* **Phân Quyền Khách & Quản Lý (Admin):**
+  * **Chế độ Khách:** Xem danh sách thực thể, lọc trạng thái, tìm kiếm theo tên/mã Key/ID/mô tả và sao chép mã Key.
+  * **Quyền Quản Lý:** Đăng nhập bằng mã PIN (mặc định: `6868`, hỗ trợ đổi mã PIN trực tiếp trên giao diện).
+* **Tạo Key = Khởi Tạo Hồ Sơ (`1 Key = 1 Hồ Sơ`):**
+  * Tạo đơn lẻ: Nhập mã Key tùy chỉnh hoặc bấm **Sinh Mã** (`KP68-XXXX-XXXX`), chọn cấp độ (`SSS` / `SS`) và điền thông tin thực thể.
+  * Tạo hàng loạt: Nhập nhiều mã Key (mỗi dòng 1 Key) để tự động tạo các hồ sơ độc bản tương ứng.
+* **Danh Sách Key Đã Cấp Phát:**
+  * Theo dõi liên kết trực tiếp giữa **Mã Key**, **Mã Hồ Sơ (`ENT-xxx`)**, **Tên Thực Thể**, **Cấp Độ**, **Trạng Thái** và **Ngày Tạo**.
+  * Hỗ trợ **Copy**, chuyển trạng thái **Thanh tẩy / Khôi phục**, hoặc **Thu hồi Key** (xóa hồ sơ).
+* **Lưu Trữ Tự Động (`localStorage`):**
+  * Dữ liệu hồ sơ/Key (`entities_v5_key_profiles`) và mã PIN (`system5_admin_pin`) được lưu trên trình duyệt của thiết bị.
 
 ---
 
-## 📂 Cấu Trúc Thư Mục
+## 🚀 Cách Chạy & Triển Khai
 
-```text
-📦 he-thong-thanh-tay-5.0
- ┣ 📜 index.html      # Mã nguồn chính (HTML5 + CSS3 5.0 + Vanilla JS)
- ┗ 📜 README.md       # Tài liệu hướng dẫn dự án (Phiên bản 2026)
+### 1. Chạy trực tiếp trên máy hoặc điện thoại
+1. Lưu mã nguồn giao diện thành tệp `index.html`.
+2. Mở `index.html` bằng trình duyệt bất kỳ (Chrome, Safari, Edge...) hoặc tải tệp lên điện thoại Android/iOS để mở xem trực tiếp.
+
+### 2. Xuất bản lên GitHub Pages (2026)
+1. Tạo repository mới trên GitHub và đẩy tệp `index.html` (cùng `README.md`) lên nhánh chính (`main`).
+2. Vào **Settings** → **Pages** của repository.
+3. Trong mục **Build and deployment**, chọn nguồn triển khai từ nhánh `main` (thư mục `/ (root)`) và lưu lại để nhận đường dẫn truy cập web.
+
+---
+
+## 🔐 Hướng Dẫn Quản Lý Nhanh
+
+* **Mã PIN mặc định:** `6868` — nên đổi mã PIN ngay sau khi đăng nhập lần đầu.
+* **Quy ước Key:** Hệ thống tự động chuẩn hóa chữ hoa và chặn tạo trùng mã Key đã liên kết với hồ sơ hiện có.
+* **Phạm vi lưu trữ:** Do dữ liệu lưu tại `localStorage` của từng trình duyệt/thiết bị, nếu chuyển sang thiết bị khác hoặc xóa dữ liệu duyệt web, bạn cần sao lưu danh sách Key trước.
+
+---
+
+## 🛠️ Công Nghệ Sử Dụng
+
+* **HTML5** & **CSS3** (CSS Variables, Grid/Flexbox, Glassmorphism, Neon HUD)
+* **Vanilla JavaScript** (DOM Rendering, Clipboard API, `localStorage`)
+
+---
+
+*Thiết kế bởi **KhangPanh68** — Tối ưu cho nền tảng Android / iOS.*
