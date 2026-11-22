@@ -160,9 +160,61 @@
             padding: 0 20px;
         }
 
+        /* Khu vực Website Liên Kết */
+        .linked-sites-bar {
+            margin: 20px auto 0;
+            background: rgba(13, 18, 34, 0.82);
+            border: 1px solid rgba(181, 55, 242, 0.35);
+            border-radius: 14px;
+            padding: 14px 18px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(12px);
+        }
+
+        .linked-sites-label {
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: #e2b8ff;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+        }
+
+        .linked-sites-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .portal-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 16px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(255, 42, 95, 0.2), rgba(181, 55, 242, 0.24));
+            border: 1px solid rgba(255, 42, 95, 0.55);
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.86rem;
+            font-weight: 800;
+            transition: 0.25s;
+            box-shadow: 0 4px 16px rgba(255, 42, 95, 0.15);
+        }
+
+        .portal-link-btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 18px rgba(0, 243, 255, 0.35);
+            color: var(--neon-cyan);
+        }
+
         /* Bảng điều khiển & Thống kê */
         .control-panel {
-            margin: 22px auto 16px;
+            margin: 18px auto 16px;
             display: flex;
             flex-wrap: wrap;
             gap: 12px;
@@ -709,6 +761,17 @@
     </header>
 
     <div class="wrapper">
+        <!-- Website Liên Kết -->
+        <section class="linked-sites-bar" aria-label="Website liên kết">
+            <div class="linked-sites-label">🌐 Website Liên Kết Hệ Thống</div>
+            <div class="linked-sites-list">
+                <a class="portal-link-btn" href="https://khangpanh6851007-hue.github.io/AmPhuCongDiaNguc/" target="_blank" rel="noopener noreferrer">
+                    <span>🔥 Quỹ Môn Quan</span>
+                    <span>↗</span>
+                </a>
+            </div>
+        </section>
+
         <!-- Bảng Quyền Quản Lý (PIN mặc định: 6868) -->
         <section id="adminPanel" class="admin-panel">
             <div class="admin-header-row">
@@ -778,7 +841,6 @@
                 </div>
             </div>
         </section>
-
         <!-- Tìm kiếm, lọc & thống kê -->
         <div class="control-panel">
             <div class="search-box">
@@ -927,8 +989,7 @@
             renderEntities();
             renderKeyTable();
         }
-
-        function handleRoleButton() {
+      function handleRoleButton() {
             if (isAdmin) {
                 isAdmin = false;
                 updateRoleUI();
@@ -1128,8 +1189,7 @@
                 if (item.eliminated) purgedTotal++;
                 else activeTotal++;
             });
-
-            document.getElementById('totalCount').textContent = entities.length;
+           document.getElementById('totalCount').textContent = entities.length;
             document.getElementById('activeCount').textContent = activeTotal;
             document.getElementById('purgedCount').textContent = purgedTotal;
             document.getElementById('keyTabCount').textContent = entities.length;
@@ -1221,4 +1281,3 @@
     </script>
 </body>
 </html>
-                        
